@@ -14,7 +14,7 @@ variable "instance_type" {
   default = "t2.nano"
 }
 variable "ami" {
-  default = "ami-0d729a60"
+  default = "ami-13be557e"
 }
 
 provider "aws" {
