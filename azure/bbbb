@@ -1,0 +1,55 @@
+azure ad app create --name "My Terraform" --home-page "http://changesworlds.com/" --identifier-uris "http://changesworlds.com/" --password killing8299
+azure ad sp create -n "My Terraform" -a 62623c53-1c9b-4664-b3e1-4b23ae3f608d
+azure role assignment create --objectId 51ef20ec-65dd-4058-8d44-e2928b2301bc -o Contributor -c /subscriptions/2db6d261-2e79-4a72-bd34-21fe049260cc
+
+variable "subscription_id" {
+  description = "Azure subscription ID"
+  default     = "SUBSCRIPTION_ID"
+}
+variable "client_id" {
+  description = "Azure client id"
+  default     = "CLIENT_ID"
+}
+variable "client_secret" {
+  description = "Azure client secret"
+  default     = "CLIENT_SECRET"
+}
+variable "tenant_id" {
+  description = "Azure tenant id"
+  default     = "TENANT_ID"
+}
+
+# Configure the Microsoft Azure Provider
+provider "azurerm" {
+  subscription_id = "${var.subscription_id}"
+  client_id       = "${var.client_id}"
+  client_secret   = "${var.client_secret}"
+  tenant_id       = "${var.tenant_id}"
+}
+
+# Create a resource group
+resource "azurerm_resource_group" "test" {
+    name     = "testTerraform"
+    location = "West US"
+}
+
+# Create a virtual network in the web_servers resource group
+resource "azurerm_virtual_network" "test" {
+  name                = "testNetwork"
+  address_space       = ["10.0.0.0/16"]
+  location            = "West US"
+  resource_group_name = "${azurerm_resource_group.test.name}"
+
+  subnet {
+    name           = "subnet1"
+    address_prefix = "10.0.1.0/24"
+  }
+  subnet {
+    name           = "subnet2"
+    address_prefix = "10.0.2.0/24"
+  }
+  subnet {
+    name           = "subnet3"
+    address_prefix = "10.0.3.0/24"
+  }
+}

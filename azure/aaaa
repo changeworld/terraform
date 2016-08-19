@@ -1,0 +1,710 @@
+Last login: Wed Aug 17 11:53:32 on ttys006
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ terraform
+usage: terraform [--version] [--help] <command> [args]
+
+The available commands for execution are listed below.
+The most common, useful commands are shown first, followed by
+less common or more advanced commands. If you're just getting
+started with Terraform, stick with the common commands. For the
+other commands, please read the help and docs before usage.
+
+Common commands:
+    apply              Builds or changes infrastructure
+    destroy            Destroy Terraform-managed infrastructure
+    fmt                Rewrites config files to canonical format
+    get                Download and install modules for the configuration
+    graph              Create a visual graph of Terraform resources
+    import             Import existing infrastructure into Terraform
+    init               Initializes Terraform configuration from a module
+    output             Read an output from a state file
+    plan               Generate and show an execution plan
+    push               Upload this Terraform module to Atlas to run
+    refresh            Update local state file against real resources
+    remote             Configure remote state storage
+    show               Inspect Terraform state or plan
+    taint              Manually mark a resource for recreation
+    untaint            Manually unmark a resource as tainted
+    validate           Validates the Terraform files
+    version            Prints the Terraform version
+
+All other commands:
+    state              Advanced state management
+
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ vi example.tf
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ mv example.tf example-aws.tf 
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ vi example.tf
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ vi example-aws.tf 
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ vi example-aws.tf 
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ vi terraform.tfvars
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ pwd
+/Users/takashitakebayashi
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ ls
+Applications		Documents		Gradle			Library			Music			Public			example-aws.tf
+Desktop			Downloads		Groovy			Movies			Pictures		VirtualBox VMs		terraform.tfvars
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ mv /Users/takashitakebayashi/Desktop/vcs/github/terraform-sample
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ mv example-aws.tf /Users/takashitakebayashi/Desktop/vcs/github/terraform-sample
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ mv terraform.tfvars /Users/takashitakebayashi/Desktop/vcs/github/terraform-sample
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ ls
+Applications	Documents	Gradle		Library		Music		Public
+Desktop		Downloads	Groovy		Movies		Pictures	VirtualBox VMs
+Takashi-no-MacBook-Pro:~ takashitakebayashi$ cd /Users/takashitakebayashi/Desktop/vcs/github/terraform-sample
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ ls
+example-aws.tf		terraform.tfvars
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ terraform plan
+Error configuring: 2 error(s) occurred:
+
+* provider.aws: missing dependency: var.access_key
+* provider.aws: missing dependency: var.secret_key
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ terraform plan
+Error loading config: Error parsing /Users/takashitakebayashi/Desktop/vcs/github/terraform-sample/example-aws.tf: At 21:16: illegal char
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ terraform plan
+Error loading config: Error parsing /Users/takashitakebayashi/Desktop/vcs/github/terraform-sample/example-aws.tf: At 21:16: illegal char
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ terraform plan
+Error loading config: Error parsing /Users/takashitakebayashi/Desktop/vcs/github/terraform-sample/example-aws.tf: At 21:16: illegal char
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ terraform plan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but
+will not be persisted to local or remote state storage.
+
+
+The Terraform execution plan has been generated and is shown below.
+Resources are shown in alphabetical order for quick scanning. Green resources
+will be created (or destroyed and then created if an existing resource
+exists), yellow resources are being changed in-place, and red resources
+will be destroyed. Cyan entries are data sources to be read.
+
+Note: You didn't specify an "-out" parameter to save this plan, so when
+"apply" is called, Terraform can't guarantee this is what will execute.
+
++ aws_instance.example
+    ami:                      "ami-0d729a60"
+    availability_zone:        "<computed>"
+    ebs_block_device.#:       "<computed>"
+    ephemeral_block_device.#: "<computed>"
+    instance_state:           "<computed>"
+    instance_type:            "t2.nano"
+    key_name:                 "<computed>"
+    network_interface_id:     "<computed>"
+    placement_group:          "<computed>"
+    private_dns:              "<computed>"
+    private_ip:               "<computed>"
+    public_dns:               "<computed>"
+    public_ip:                "<computed>"
+    root_block_device.#:      "<computed>"
+    security_groups.#:        "<computed>"
+    source_dest_check:        "true"
+    subnet_id:                "<computed>"
+    tenancy:                  "<computed>"
+    vpc_security_group_ids.#: "<computed>"
+
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ terraform apply
+aws_instance.example: Creating...
+  ami:                      "" => "ami-0d729a60"
+  availability_zone:        "" => "<computed>"
+  ebs_block_device.#:       "" => "<computed>"
+  ephemeral_block_device.#: "" => "<computed>"
+  instance_state:           "" => "<computed>"
+  instance_type:            "" => "t2.nano"
+  key_name:                 "" => "<computed>"
+  network_interface_id:     "" => "<computed>"
+  placement_group:          "" => "<computed>"
+  private_dns:              "" => "<computed>"
+  private_ip:               "" => "<computed>"
+  public_dns:               "" => "<computed>"
+  public_ip:                "" => "<computed>"
+  root_block_device.#:      "" => "<computed>"
+  security_groups.#:        "" => "<computed>"
+  source_dest_check:        "" => "true"
+  subnet_id:                "" => "<computed>"
+  tenancy:                  "" => "<computed>"
+  vpc_security_group_ids.#: "" => "<computed>"
+Error applying plan:
+
+1 error(s) occurred:
+
+* aws_instance.example: Error launching source instance: PendingVerification: Your account is currently being verified. Verification normally takes less than 2 hours. Until your account is verified, you may not be able to launch additional instances or create additional volumes. If you are still receiving this message after more than 2 hours, please let us know by writing to aws-verification@amazon.com. We appreciate your patience.
+	status code: 400, request id: 2c8015a4-c307-422e-9d70-1dc6c34af772
+
+Terraform does not automatically rollback in the face of errors.
+Instead, your Terraform state file has been partially updated with
+any resources that successfully completed. Please address the error
+above and apply again to incrementally change your infrastructure.
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ git st
+fatal: Not a git repository (or any of the parent directories): .git
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ ls
+example-aws.tf		terraform.tfstate	terraform.tfvars
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ ls -lktr
+total 12
+-rw-r--r--  1 takashitakebayashi  staff   92  8 17 12:49 terraform.tfvars
+-rw-r--r--  1 takashitakebayashi  staff  607  8 17 12:50 example-aws.tf
+-rw-r--r--  1 takashitakebayashi  staff  286  8 17 12:52 terraform.tfstate
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ ls -lktr
+total 12
+-rw-r--r--  1 takashitakebayashi  staff   92  8 17 12:49 terraform.tfvars
+-rw-r--r--  1 takashitakebayashi  staff  607  8 17 12:50 example-aws.tf
+-rw-r--r--  1 takashitakebayashi  staff  286  8 17 12:52 terraform.tfstate
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ terraform apply
+aws_instance.example: Creating...
+  ami:                      "" => "ami-0d729a60"
+  availability_zone:        "" => "<computed>"
+  ebs_block_device.#:       "" => "<computed>"
+  ephemeral_block_device.#: "" => "<computed>"
+  instance_state:           "" => "<computed>"
+  instance_type:            "" => "t2.nano"
+  key_name:                 "" => "<computed>"
+  network_interface_id:     "" => "<computed>"
+  placement_group:          "" => "<computed>"
+  private_dns:              "" => "<computed>"
+  private_ip:               "" => "<computed>"
+  public_dns:               "" => "<computed>"
+  public_ip:                "" => "<computed>"
+  root_block_device.#:      "" => "<computed>"
+  security_groups.#:        "" => "<computed>"
+  source_dest_check:        "" => "true"
+  subnet_id:                "" => "<computed>"
+  tenancy:                  "" => "<computed>"
+  vpc_security_group_ids.#: "" => "<computed>"
+aws_instance.example: Still creating... (10s elapsed)
+aws_instance.example: Still creating... (20s elapsed)
+aws_instance.example: Creation complete
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+The state of your infrastructure has been saved to the path
+below. This state is required to modify and destroy your
+infrastructure, so keep it safe. To inspect the complete state
+use the `terraform show` command.
+
+State path: terraform.tfstate
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ terraform destroy
+Do you really want to destroy?
+  Terraform will delete all your managed infrastructure.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+aws_instance.example: Refreshing state... (ID: i-ea8c9374)
+aws_instance.example: Destroying...
+aws_instance.example: Still destroying... (10s elapsed)
+aws_instance.example: Still destroying... (20s elapsed)
+aws_instance.example: Still destroying... (30s elapsed)
+aws_instance.example: Still destroying... (40s elapsed)
+aws_instance.example: Still destroying... (50s elapsed)
+aws_instance.example: Destruction complete
+
+Apply complete! Resources: 0 added, 0 changed, 1 destroyed.
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ azure  account list --json
+[
+  {
+    "id": "295daad3-eaae-4e19-ba9a-e0df7a23f939",
+    "name": "Azure Pass",
+    "user": {
+      "name": "changesworlds@gmail.com",
+      "type": "user"
+    },
+    "tenantId": "0c38db8e-0eec-4bba-829c-f9d7ae2bf8e0",
+    "state": "Disabled",
+    "isDefault": true,
+    "registeredProviders": [],
+    "environmentName": "AzureCloud"
+  },
+  {
+    "id": "2db6d261-2e79-4a72-bd34-21fe049260cc",
+    "name": "Visual Studio Enterprise with MSDN",
+    "user": {
+      "name": "changesworlds@gmail.com",
+      "type": "user"
+    },
+    "tenantId": "0c38db8e-0eec-4bba-829c-f9d7ae2bf8e0",
+    "state": "Enabled",
+    "isDefault": false,
+    "registeredProviders": [],
+    "environmentName": "AzureCloud"
+  },
+  {
+    "id": "c8cc12c9-822d-482d-9421-31295ac7f2d1",
+    "name": "従量課金制",
+    "user": {
+      "name": "changesworlds@gmail.com",
+      "type": "user"
+    },
+    "tenantId": "0c38db8e-0eec-4bba-829c-f9d7ae2bf8e0",
+    "state": "Enabled",
+    "isDefault": false,
+    "registeredProviders": [],
+    "environmentName": "AzureCloud"
+  },
+  {
+    "id": "9f68023b-e399-47e9-b94d-16ad916ebcef",
+    "name": "BizSpark",
+    "user": {
+      "name": "changesworlds@gmail.com",
+      "type": "user"
+    },
+    "tenantId": "720c7176-b285-4e3b-b704-fdba4c7cc970",
+    "state": "Enabled",
+    "isDefault": false,
+    "registeredProviders": [],
+    "environmentName": "AzureCloud"
+  }
+]
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ 
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ 
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ azure ad app create --name "My Terraform" --home-page "http://changesworlds.com/" --identifier-uris "http://changesworlds.com/" --password killing8299
+info:    Executing command ad app create
++ Creating application My Terraform                                            
+data:    AppId:                   62623c53-1c9b-4664-b3e1-4b23ae3f608d
+data:    ObjectId:                5efa98a1-0877-47fe-b962-8453fe9faf85
+data:    DisplayName:             My Terraform
+data:    IdentifierUris:          0=http://changesworlds.com/
+data:    ReplyUrls:              
+data:    AvailableToOtherTenants: False
+data:    HomePage:                http://changesworlds.com/
+info:    ad app create command OK
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ azure ad sp create 62623c53-1c9b-4664-b3e1-4b23ae3f608d
+info:    Executing command ad sp create
+
+  error: missing required argument `name'
+
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ azure ad
+help:    Commands to display Active Directory objects
+help:    
+help:    Commands to display Active Directory applications
+help:      ad app create [options] <name> <home-page> <identifier-uris>
+help:      ad app set [options]
+help:      ad app delete [options] <object-id>
+help:      ad app list [options]
+help:      ad app show [options]
+help:    
+help:    Commands to display Active Directory groups
+help:      ad group list [options]
+help:      ad group show [options]
+help:      ad group create [options] <display-name> <mail-nickname>
+help:      ad group delete [options] <objectId>
+help:    
+help:    Commands to provide an Active Directory sub group or member info
+help:      ad group member list [options] <objectId>
+help:      ad group member add [options] <objectId> <member-objectId>
+help:      ad group member delete [options] <objectId> <member-objectId>
+help:      ad group member check [options] <objectId> <member-objectId>
+help:    
+help:    Commands to display Active Directory service principals
+help:      ad sp list [options]
+help:      ad sp show [options]
+help:      ad sp create [options]
+help:      ad sp set [options] <objectId>
+help:      ad sp delete [options] <objectId>
+help:    
+help:    Commands to display Active Directory users
+help:      ad user list [options]
+help:      ad user show [options]
+help:      ad user delete [options] <upn-or-objectId>
+help:      ad user create [options] <upn> <display-name> <mail-nickname> <password>
+help:      ad user set [options] <upn-or-objectId>
+help:    
+help:    Commands to display member groups of the Active Directory user.
+help:      ad user memberGroups list [options] <objectId>
+help:    
+help:    Options:
+help:      -h, --help  output usage information
+help:    
+help:    Current Mode: arm (Azure Resource Management)
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ ad sp create -h
+-bash: ad: command not found
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ azure ad sp create -h
+help:    Create Active Directory service principal.
+help:    
+help:    Usage: ad sp create [options]
+help:    
+help:    Options:
+help:      -h, --help                              output usage information
+help:      -v, --verbose                           use verbose output
+help:      -vv                                     more verbose with debug output
+help:      --json                                  use json output
+help:      -a --applicationId <applicationId>      The application Id for which service principal needs to be created. If this is provided then everything else will be ignored. 
+help:      When the applicationId is provided it means that the application was already created and it needs to be used to create the service principal.
+help:      -n --name <name>                        the display name for the application
+help:      -m --home-page <home-page>              the URL to the application homepage
+help:      -b --available                          indicates if the application will be available to other tenants
+help:      -p --password <password>                the value for the password credential associated with the application that will be valid for one year by default
+help:      -i --identifier-uris <identifier-uris>  the comma-delimitied URIs that identify the application
+help:      -r --reply-urls <reply-urls>            the comma-delimitied application reply urls
+help:      --key-value <key-value>                 the value for the key credentials associated with the application that will be valid for one year by default
+help:      --key-type <key-type>                   the type of the key credentials associated with the application. Acceptable values are AsymmetricX509Cert, Password and Symmetric
+help:      --key-usage <key-usage>                 the usage of the key credentials associated with the application. Acceptable values are Sign and Verify
+help:      --start-date <start-date>               the start date after which password or key would be valid. Default value is current time
+help:      --end-date <end-date>                   the end date till which password or key is valid. Default value is one year after current time
+help:    
+help:    Current Mode: arm (Azure Resource Management)
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ azure ad sp create -n "My Terraform" -a 62623c53-1c9b-4664-b3e1-4b23ae3f608d
+info:    Executing command ad sp create
++ Creating service principal for application 62623c53-1c9b-4664-b3e1-4b23ae3f608d
+data:    Object Id:               51ef20ec-65dd-4058-8d44-e2928b2301bc
+data:    Display Name:            My Terraform
+data:    Service Principal Names:
+data:                             62623c53-1c9b-4664-b3e1-4b23ae3f608d
+data:                             http://changesworlds.com/
+info:    ad sp create command OK
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ azure role assignment create -h
+help:    Assigns the specified RBAC role to the specified principal, at the specified scope.
+help:    
+help:    Usage: role assignment create [objectId] [signInName] [spn] [roleName] [roleId] [scope] [resource-group] [resource-type] [resource-name]
+
+           -----    Example 1   -------
+           azure role assignment create --resource-group testRG --signInName john.doe@contoso.com
+           Grant access to a user at a resource group scope.
+
+           -----    Example 2   -------
+           azure ad group show --search "Christine Koch Team"
+           + Getting group list
+           data:    Display Name:      Christine Koch Team
+           data:    ObjectId:          2f9d4375-cbf1-48e8-83c9-2a0be4cb33fb
+           data:    Security Enabled:  true
+           data:    Mail Enabled:
+
+           azure role assignment create --objectId 2f9d4375-cbf1-48e8-83c9-2a0be4cb33fb --roleName Contributor --resource-group testRG
+           Grants access to a security group.
+
+           -----    Example 3   -------
+           azure role assignment create --signInName john.doe@contoso.com --roleName Owner --scope "/subscriptions/96231a05-34ce-4eb4-aa6a-70759cbb5e83/resourcegroups/rg1/providers/Microsoft.Web/sites/site1"
+           Grants access to a user at a resource 'site1' (website) scope.
+
+           -----    Example 4   -------
+           azure role assignment create --objectId 5ac84765-1c8c-4994-94b2-629461bd191b --roleName "Virtual Machine Contributor" --resouce-name Devices-Engineering-ProjectRND --resource-type Microsoft.Network/virtualNetworks/subnets --parent virtualNetworks/VNET-EASTUS-01 --resource-group Network
+           Grant access to a group at a nested resource (subnet)
+
+help:    
+help:    Options:
+help:      -h, --help                            output usage information
+help:      -v, --verbose                         use verbose output
+help:      -vv                                   more verbose with debug output
+help:      --json                                use json output
+help:      --objectId <objectId>                 Azure AD Objectid of the user, group or service principal
+help:      --signInName <signInName>             The email address or the user principal name of the user.
+help:      --spn <spn>                           The ServicePrincipalName of the Azure AD application.
+help:      -o --roleName <roleName>              The Name of the RBAC role that needs to be assigned to the principal i.e. Reader, Contributor, Virtual Network Administrator, etc.
+help:      -d --roleId <roleId>                  The Id of the RBAC role that needs to be assigned to the principal.
+help:      -c --scope <scope>                    The Scope of the role assignment. In the format of relative URI. For e.g. "/subscriptions/9004a9fd-d58e-48dc-aeb2-4a4aec58606f/resourceGroups/TestRG". If not specified, will create the role assignment at subscription level. If specified, it should start with "/subscriptions/{id}".
+help:      -g --resource-group <resource-group>  The resource group name. Creates an assignment that is effective at the specified resource group. When used in conjunction with resource-name, resource-type and (optionally)parent parameters, the command constructs a hierarchical scope in the form of a relative URI that identifies a resource.
+help:      -r --resource-type <resource-type>    The resource type. For e.g. Microsoft.Network/virtualNetworks. Should only be used in conjunction with resource-name, resource-group and (optionally)parent parameters to construct a hierarchical scope in the form of a relative URI that identifies a resource.
+help:      -u --resource-name <resource-name>    The resource name. For e.g. storageaccountprod. Should only be used in conjunction with resource-type, resource-group and (optionally)parent parameters to construct a hierarchical scope in the form of a relative URI that identifies a resource.
+help:      --parent <parent>                     The parent resource in the hierarchy of the resource specified using resource-name parameter. Must be used in conjunction with resource-name, resource-type and resource-group parameters to construct a hierarchical scope in the form of a relative URI that identifies a resource.
+help:      --subscription <subscription>         Name or identifier of the subscription where the role assignment will be created.
+help:    
+help:    Current Mode: arm (Azure Resource Management)
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ azure account list
+info:    Executing command account list
+data:    Name                                Id                                    Current  State   
+data:    ----------------------------------  ------------------------------------  -------  --------
+data:    Azure Pass                          295daad3-eaae-4e19-ba9a-e0df7a23f939  true     Disabled
+data:    Visual Studio Enterprise with MSDN  2db6d261-2e79-4a72-bd34-21fe049260cc  false    Enabled 
+data:    従量課金制                               c8cc12c9-822d-482d-9421-31295ac7f2d1  false    Enabled 
+data:    BizSpark                            9f68023b-e399-47e9-b94d-16ad916ebcef  false    Enabled 
+info:    account list command OK
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ azure account -h
+help:    Commands to manage your account information and publish settings
+help:    
+help:    List the imported subscriptions
+help:      account list [options]
+help:    
+help:    Show details about a subscription
+help:      account show [options] [subscriptionNameOrId]
+help:    
+help:    Set the current subscription
+help:      account set [options] <subscriptionNameOrId>
+help:    
+help:    Remove a subscription or environment, or clear all of the stored account and environment info
+help:      account clear [options]
+help:    
+help:    Commands to manage your account environment
+help:      account env list [options]
+help:      account env show [options] [environment]
+help:      account env add [options] [environment]
+help:      account env set [options] [environment]
+help:      account env delete [options] [environment]
+help:    
+help:    Options:
+help:      -h, --help  output usage information
+help:    
+help:    Current Mode: arm (Azure Resource Management)
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ azure account set -h
+help:    Set the current subscription
+help:    
+help:    Usage: account set [options] <subscriptionNameOrId>
+help:    
+help:    Options:
+help:      -h, --help     output usage information
+help:      -v, --verbose  use verbose output
+help:      -vv            more verbose with debug output
+help:      --json         use json output
+help:    
+help:    Current Mode: arm (Azure Resource Management)
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ azure account set 2db6d261-2e79-4a72-bd34-21fe049260cc
+info:    Executing command account set
+info:    Setting subscription to "Visual Studio Enterprise with MSDN" with id "2db6d261-2e79-4a72-bd34-21fe049260cc".
+info:    Changes saved
+info:    account set command OK
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ azure account list
+info:    Executing command account list
+data:    Name                                Id                                    Current  State   
+data:    ----------------------------------  ------------------------------------  -------  --------
+data:    Azure Pass                          295daad3-eaae-4e19-ba9a-e0df7a23f939  false    Disabled
+data:    Visual Studio Enterprise with MSDN  2db6d261-2e79-4a72-bd34-21fe049260cc  true     Enabled 
+data:    従量課金制                               c8cc12c9-822d-482d-9421-31295ac7f2d1  false    Enabled 
+data:    BizSpark                            9f68023b-e399-47e9-b94d-16ad916ebcef  false    Enabled 
+info:    account list command OK
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ azure role assignment create --objectId 51ef20ec-65dd-4058-8d44-e2928b2301bc -o Contributor -c /subscriptions/2db6d261-2e79-4a72-bd34-21fe049260cc
+info:    Executing command role assignment create
++ Finding role with specified name                                             
+|data:    RoleAssignmentId     : /subscriptions/2db6d261-2e79-4a72-bd34-21fe049260cc/providers/Microsoft.Authorization/roleAssignments/ad16a6d0-ff13-4419-a2b0-bf4579830139
+data:    RoleDefinitionName   : Contributor
+data:    RoleDefinitionId     : b24988ac-6180-42a0-ab88-20f7382dd24c
+data:    Scope                : /subscriptions/2db6d261-2e79-4a72-bd34-21fe049260cc
+data:    Display Name         : My Terraform
+data:    SignInName           : undefined
+data:    ObjectId             : 51ef20ec-65dd-4058-8d44-e2928b2301bc
+data:    ObjectType           : ServicePrincipal
+data:    
++
+info:    role assignment create command OK
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ 
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ pwd
+/Users/takashitakebayashi/Desktop/vcs/github/terraform-sample
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ ls
+aws	azure
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ cd a
+aws/   azure/ 
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ cd azure/
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ ls
+azure.tf		terraform.tfvars
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ terraform plan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but
+will not be persisted to local or remote state storage.
+
+Error refreshing state: 1 error(s) occurred:
+
+* Credentials for acessing the Azure Resource Manager API are likely to be incorrect, or
+  the service principal does not have permission to use the Azure Service Management
+  API.
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ terraform plan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but
+will not be persisted to local or remote state storage.
+
+Error refreshing state: 1 error(s) occurred:
+
+* Credentials for acessing the Azure Resource Manager API are likely to be incorrect, or
+  the service principal does not have permission to use the Azure Service Management
+  API.
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ 
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ 
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ 
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ pwd
+/Users/takashitakebayashi/Desktop/vcs/github/terraform-sample/azure
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ terraform plan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but
+will not be persisted to local or remote state storage.
+
+Error refreshing state: 1 error(s) occurred:
+
+* Credentials for acessing the Azure Resource Manager API are likely to be incorrect, or
+  the service principal does not have permission to use the Azure Service Management
+  API.
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ terraform apply
+Error refreshing state: 1 error(s) occurred:
+
+* Credentials for acessing the Azure Resource Manager API are likely to be incorrect, or
+  the service principal does not have permission to use the Azure Service Management
+  API.
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ azure account list --json
+[
+  {
+    "id": "295daad3-eaae-4e19-ba9a-e0df7a23f939",
+    "name": "Azure Pass",
+    "user": {
+      "name": "changesworlds@gmail.com",
+      "type": "user"
+    },
+    "tenantId": "0c38db8e-0eec-4bba-829c-f9d7ae2bf8e0",
+    "state": "Disabled",
+    "isDefault": false,
+    "registeredProviders": [],
+    "environmentName": "AzureCloud"
+  },
+  {
+    "id": "2db6d261-2e79-4a72-bd34-21fe049260cc",
+    "name": "Visual Studio Enterprise with MSDN",
+    "user": {
+      "name": "changesworlds@gmail.com",
+      "type": "user"
+    },
+    "tenantId": "0c38db8e-0eec-4bba-829c-f9d7ae2bf8e0",
+    "state": "Enabled",
+    "isDefault": true,
+    "registeredProviders": [],
+    "environmentName": "AzureCloud"
+  },
+  {
+    "id": "c8cc12c9-822d-482d-9421-31295ac7f2d1",
+    "name": "従量課金制",
+    "user": {
+      "name": "changesworlds@gmail.com",
+      "type": "user"
+    },
+    "tenantId": "0c38db8e-0eec-4bba-829c-f9d7ae2bf8e0",
+    "state": "Enabled",
+    "isDefault": false,
+    "registeredProviders": [],
+    "environmentName": "AzureCloud"
+  },
+  {
+    "id": "9f68023b-e399-47e9-b94d-16ad916ebcef",
+    "name": "BizSpark",
+    "user": {
+      "name": "changesworlds@gmail.com",
+      "type": "user"
+    },
+    "tenantId": "720c7176-b285-4e3b-b704-fdba4c7cc970",
+    "state": "Enabled",
+    "isDefault": false,
+    "registeredProviders": [],
+    "environmentName": "AzureCloud"
+  }
+]
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ terraform plan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but
+will not be persisted to local or remote state storage.
+
+Error refreshing state: 1 error(s) occurred:
+
+* Credentials for acessing the Azure Resource Manager API are likely to be incorrect, or
+  the service principal does not have permission to use the Azure Service Management
+  API.
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ terraform plan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but
+will not be persisted to local or remote state storage.
+
+Error refreshing state: 1 error(s) occurred:
+
+* Credentials for acessing the Azure Resource Manager API are likely to be incorrect, or
+  the service principal does not have permission to use the Azure Service Management
+  API.
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ terraform plan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but
+will not be persisted to local or remote state storage.
+
+Error refreshing state: 1 error(s) occurred:
+
+* Credentials for acessing the Azure Resource Manager API are likely to be incorrect, or
+  the service principal does not have permission to use the Azure Service Management
+  API.
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ terraform plan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but
+will not be persisted to local or remote state storage.
+
+Error refreshing state: 1 error(s) occurred:
+
+* Credentials for acessing the Azure Resource Manager API are likely to be incorrect, or
+  the service principal does not have permission to use the Azure Service Management
+  API.
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ ls
+azure.tf		terraform.tfvars
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ pwd
+/Users/takashitakebayashi/Desktop/vcs/github/terraform-sample/azure
+Takashi-no-MacBook-Pro:azure takashitakebayashi$ cd ..
+Takashi-no-MacBook-Pro:terraform-sample takashitakebayashi$ cd legacy-azure/
+Takashi-no-MacBook-Pro:legacy-azure takashitakebayashi$ terraform plan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but
+will not be persisted to local or remote state storage.
+
+Error refreshing state: 1 error(s) occurred:
+
+* 4 error(s) occurred:
+
+* Subscription ID must be configured for the AzureRM provider
+* Client ID must be configured for the AzureRM provider
+* Client Secret must be configured for the AzureRM provider
+* Tenant ID must be configured for the AzureRM provider
+Takashi-no-MacBook-Pro:legacy-azure takashitakebayashi$ pwd
+/Users/takashitakebayashi/Desktop/vcs/github/terraform-sample/legacy-azure
+Takashi-no-MacBook-Pro:legacy-azure takashitakebayashi$ ls
+azure-credentials.publishsettings	azure.tf
+Takashi-no-MacBook-Pro:legacy-azure takashitakebayashi$ ls
+azure-credentials.publishsettings	azure.tf
+Takashi-no-MacBook-Pro:legacy-azure takashitakebayashi$ terraform plan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but
+will not be persisted to local or remote state storage.
+
+
+No changes. Infrastructure is up-to-date. This means that Terraform
+could not detect any differences between your configuration and
+the real physical resources that exist. As a result, Terraform
+doesn't need to do anything.
+Takashi-no-MacBook-Pro:legacy-azure takashitakebayashi$ terraform plan
+Error configuring: 1 error(s) occurred:
+
+* azure_instance.web: missing dependency: azure_hosted_service.terraform-service
+Takashi-no-MacBook-Pro:legacy-azure takashitakebayashi$ terraform plan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but
+will not be persisted to local or remote state storage.
+
+
+The Terraform execution plan has been generated and is shown below.
+Resources are shown in alphabetical order for quick scanning. Green resources
+will be created (or destroyed and then created if an existing resource
+exists), yellow resources are being changed in-place, and red resources
+will be destroyed. Cyan entries are data sources to be read.
+
+Note: You didn't specify an "-out" parameter to save this plan, so when
+"apply" is called, Terraform can't guarantee this is what will execute.
+
++ azure_hosted_service.terraform-service
+    default_certificate_thumbprint: "<computed>"
+    description:                    "Hosted service created by Terraform."
+    ephemeral_contents:             "false"
+    label:                          "tf-hs-01"
+    location:                       "North Europe"
+    name:                           "terraform-service"
+    status:                         "<computed>"
+    url:                            "<computed>"
+
++ azure_instance.web
+    automatic_updates:                "false"
+    description:                      "<computed>"
+    domain_name:                      "contoso.com"
+    domain_ou:                        "OU=Servers,DC=contoso.com,DC=Contoso,DC=com"
+    domain_password:                  "Pa$word123"
+    domain_username:                  "Administrator"
+    endpoint.#:                       "1"
+    endpoint.2462817782.name:         "SSH"
+    endpoint.2462817782.private_port: "22"
+    endpoint.2462817782.protocol:     "tcp"
+    endpoint.2462817782.public_port:  "22"
+    has_dedicated_service:            "<computed>"
+    hosted_service_name:              "terraform-service"
+    image:                            "Ubuntu Server 14.04 LTS"
+    ip_address:                       "<computed>"
+    location:                         "West US"
+    name:                             "terraform-test"
+    password:                         "Pass!admin123"
+    security_group:                   "<computed>"
+    size:                             "Basic_A1"
+    storage_service_name:             "yourstorage"
+    subnet:                           "<computed>"
+    username:                         "terraform"
+    vip_address:                      "<computed>"
+
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+Takashi-no-MacBook-Pro:legacy-azure takashitakebayashi$ 
