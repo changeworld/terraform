@@ -1,0 +1,26 @@
+machine:
+  environment:
+    PATH: $HOME/.terraform:$PATH
+    TERRAFORM_VERSION: 0.7.0
+dependencies:
+  cache_directories:
+    - ~/.terraform
+  pre:
+    - |
+      mkdir -p $HOME/.terraform
+      if [ -z "$(ls -A $HOME/.terraform)" ]; then
+        cd $HOME/.terraform
+        curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+        unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+        rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+      fi
+test:
+  override:
+    - |
+      cd aws
+      terraform plan --refresh=false
+deployment:
+  production:
+    branch: master
+    commands:
+      - terraform apply
