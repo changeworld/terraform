@@ -23,4 +23,6 @@ deployment:
   production:
     branch: master
     commands:
-      - terraform apply
+    - |
+      cd aws
+      terraform apply
