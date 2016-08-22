@@ -16,13 +16,9 @@ dependencies:
       fi
 test:
   override:
-    - |
-      cd aws
-      terraform plan --refresh=false
+    - terraform plan --refresh=false
 deployment:
   production:
     branch: master
     commands:
-    - |
-      cd aws
-      terraform apply
+    - terraform apply
