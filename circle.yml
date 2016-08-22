@@ -15,10 +15,20 @@ dependencies:
         rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
       fi
 test:
+  pre:
+    - |
+      terraform remote config -backend=s3 -backend-config="bucket=changeworld-terraform-state" -backend-config="key=terraform-aws/terraform.tfstate" -backend-config="region=ap-northeast-1"
+      terraform remote pull
   override:
     - terraform plan --refresh=false
+  post:
+    - terraform remote push
 deployment:
   production:
     branch: master
     commands:
-    - terraform apply
+      - |
+        terraform remote config -backend=s3 -backend-config="bucket=changeworld-terraform-state" -backend-config="key=terraform-aws/terraform.tfstate" -backend-config="region=ap-northeast-1"
+        terraform remote pull
+        terraform apply
+        terraform remote push
