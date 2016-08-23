@@ -1,3 +1,3 @@
-# Terraform
+# terraform-aws
 
-Trial Terraform.
+Trial Terraform for AWS.
