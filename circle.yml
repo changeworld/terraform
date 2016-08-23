@@ -17,7 +17,7 @@ dependencies:
 test:
   pre:
     - |
-      terraform remote config -backend=s3 -backend-config="bucket=changeworld-terraform-state" -backend-config="key=terraform-aws/terraform.tfstate" -backend-config="region=ap-northeast-1"
+      terraform remote config -backend=s3 -backend-config="bucket=changeworld-terraform-states" -backend-config="key=terraform-aws/terraform.tfstate" -backend-config="region=us-east-1"
       terraform remote pull
   override:
     - terraform plan --refresh=false
@@ -28,7 +28,7 @@ deployment:
     branch: master
     commands:
       - |
-        terraform remote config -backend=s3 -backend-config="bucket=changeworld-terraform-state" -backend-config="key=terraform-aws/terraform.tfstate" -backend-config="region=ap-northeast-1"
+        terraform remote config -backend=s3 -backend-config="bucket=changeworld-terraform-states" -backend-config="key=terraform-aws/terraform.tfstate" -backend-config="region=us-east-1"
         terraform remote pull
         terraform apply
         terraform remote push
